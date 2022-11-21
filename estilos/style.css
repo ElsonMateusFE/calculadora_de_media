@@ -102,3 +102,30 @@ table td img {
 .reprovado {
     background-color: red;
 }
+
+@media screen and (max-width: 767px){
+    .container {
+        max-width: 90%;
+    }
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    form {
+        display: block;
+    }
+
+    form input {
+        font-size: 22.9px;
+    }
+
+    form button {
+        font-size: 20px;
+        margin-top: 10px;
+    }
+
+    table th {
+        font-size: 20px;
+    }
+}

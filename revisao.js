@@ -3,7 +3,7 @@ const emojiAprovado = '<img src="./images/aprovado.png" alt="Emoji festejando">'
 const emojiReprovado = '<img src="./images/reprovado.png" alt="Emoji decepção">'
 const alertProvado = '<span class="resultado aprovado">Aprovado</span>'
 const alertReprovado = '<span class="resultado reprovado">Reprovado</span>'
-const escolhaMedia = parseFloat(prompt('Escolha uma média:'))
+//const escolhaMedia = parseFloat(prompt('Escolha uma média:'))
 const atividades = []
 const notas = []
 let linhas = ''
@@ -30,7 +30,7 @@ function inputAtividadesNotas(){
         let linha = '<tr>'
         linha += `<td>${nomeAtivdiade.value}</td>`
         linha += `<td>${notaAtivdiade.value}</td>`
-        linha += `<td>${notaAtivdiade.value >= escolhaMedia ? emojiAprovado : emojiReprovado}</td>`
+        linha += `<td>${notaAtivdiade.value >= 7 ? emojiAprovado : emojiReprovado}</td>`
         linha += '</tr>'
     
         linhas += linha
@@ -59,5 +59,5 @@ function atualizaMedia(){
     const mediaFinal = somarEMedia()
 
     document.getElementById('media-final-valor').innerHTML = mediaFinal.toFixed(2)
-    document.getElementById('media-final-resultado').innerHTML = mediaFinal >= escolhaMedia ? alertProvado : alertReprovado
+    document.getElementById('media-final-resultado').innerHTML = mediaFinal >= 7 ? alertProvado : alertReprovado
 }
