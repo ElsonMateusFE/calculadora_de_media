@@ -1,60 +1,59 @@
 const form = document.getElementById('form-atividade')
 const imgAprovado = '<img src="./images/aprovado.png" alt="Emoji festejando">'
-const imgReprovado = '<img src="./images/reprovado.png" alt="Emoji decepção">'
+const imgReprovado = '<img src="./images/reprovado.png" alt="Emoji decepçção">'
 const spanAprovado = '<span class="resultado aprovado">Aprovado</span>'
 const spanReprovado = '<span class="resultado reprovado">Reprovado</span>'
 const atividades = []
 const notas = []
-const escolherMedia = parseFloat(prompt('Escolha uma média (0 - 10)'))
+const novaMedia = Number(prompt('Escolha uma média'))
 let linhas = ''
 
-form.addEventListener('submit', function(evento){
+form.addEventListener('submit', (evento) => {
     evento.preventDefault()
 
-    inputNota()
-    addNota()
-    addMedia()
+    inputNovasNotas()
+    addNovaNotas()
+    mediaFinal()
 })
 
-function inputNota(){
+function addNovaNotas(){
+    const tbody = document.querySelector('tbody')
+    tbody.innerHTML = linhas
+}
+
+function inputNovasNotas(){
     const nomeAtividade = document.getElementById('nome-atividade')
     const notaAtividade = document.getElementById('nota-atividade')
-    
+
     if(atividades.includes(nomeAtividade.value)){
-        alert(`Atividade ${nomeAtividade.value} já foi ultilizada`)
+        alert(`${nomeAtividade.value} já está em uso`)
     }else{
         atividades.push(nomeAtividade.value)
-        notas.push(parseFloat(notaAtividade.value))
+        notas.push(Number(notaAtividade.value))
     
         let linha = '<tr>'
         linha += `<td>${nomeAtividade.value}</td>`
         linha += `<td>${notaAtividade.value}</td>`
-        linha += `<td>${notaAtividade.value >= escolherMedia ? imgAprovado : imgReprovado}</td>`
+        linha += `<td>${notaAtividade.value >= novaMedia ? imgAprovado : imgReprovado}</td>`
         linha += '</tr>'
-        
+    
         linhas += linha
-        
-        nomeAtividade.value = ''
-        notaAtividade.value = ''
     }
 }
 
-function addNota(){
-    const tBody = document.querySelector('tbody')
-    tBody.innerHTML = linhas
-}
+function somarNotas(){
+    let ref = 0;
 
-function somaMedia(){
-    let valorRef = 0
     for(let i = 0; i < notas.length; i++){
-        valorRef += notas[i]
+        ref += notas[i]
     }
-    return valorRef / notas.length
+
+    return ref / notas.length 
 }
 
-function addMedia(){
-    const mediaFinal = somaMedia()
+function mediaFinal(){
+    const media = somarNotas()
 
-    document.getElementById('media-final-valor').innerHTML = mediaFinal.toFixed(2)
-    document.getElementById('media-final-resultado').innerHTML = mediaFinal >= escolherMedia ? spanAprovado : spanReprovado
+    document.getElementById('media-final-valor').innerHTML = media.toFixed(2)
+    document.getElementById('media-final-resultado').innerHTML = media >= novaMedia ? spanAprovado : spanReprovado
 }
